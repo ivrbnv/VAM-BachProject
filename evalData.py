@@ -1,8 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+#matplotlib is used to display the graphs and charts
 import seaborn as sns
-
+#seaborn is used to create the graphs and charts, it is built on top of matplotlib and provides a higher-level interface
 df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features.csv")
+#we import pandas to utilise its reading csv ability here
 
 # Basic info
 print("Shape:", df.shape)
