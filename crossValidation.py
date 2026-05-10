@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.model_selection import StratifiedKFold, cross_validate
-from sklearn.preprocessing import RobustScaler
+from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.svm import SVC
@@ -23,7 +23,7 @@ y_test = test["label"]
 
 # ── Define models ──────────────────────────────────────────────────────────────
 models = {
-    "Logistic Regression": LogisticRegression(max_iter=1000, class_weight="balanced"),
+    "Logistic Regression": LogisticRegression(max_iter=5000, class_weight="balanced"),
     "Random Forest":       RandomForestClassifier(n_estimators=100, class_weight="balanced", random_state=42, n_jobs=-1),
     "Gradient Boosting":   GradientBoostingClassifier(n_estimators=100, random_state=42),
     "SVM":                 SVC(kernel="rbf", class_weight="balanced", random_state=42),
@@ -47,7 +47,7 @@ for name, model in models.items():
         y_fold_train, y_fold_val = y.iloc[train_idx], y.iloc[val_idx]
 
         # Scale inside the fold to prevent leakage
-        scaler = RobustScaler()
+        scaler = StandardScaler()
         X_fold_train = scaler.fit_transform(X_fold_train)
         X_fold_val   = scaler.transform(X_fold_val)
 
@@ -73,7 +73,7 @@ print("FINAL TEST SET RESULTS")
 print("="*60)
 
 # Refit each model on full training data, scale properly
-scaler_final = RobustScaler()
+scaler_final = StandardScaler()
 X_train_scaled = scaler_final.fit_transform(X)
 X_test_scaled  = scaler_final.transform(X_test)
 
@@ -92,4 +92,4 @@ for name, model in models.items():
     plt.savefig(f"cm_final_{name.replace(' ', '_')}.png")
     plt.show()
 
-joblib.dump(scaler_final, r"C:\Users\User\Documents\Bachelor-Thesis\python\scaler_cross_validation.pkl")
+joblib.dump(scaler_final, r"C:\Users\User\Documents\Bachelor-Thesis\python\scaler_cross_validation_cleaned.pkl")
