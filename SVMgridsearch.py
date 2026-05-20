@@ -2,14 +2,14 @@ import pandas as pd
 import seaborn as sns
 from sklearn.model_selection import train_test_split, GridSearchCV
 from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import RobustScaler
+#from sklearn.preprocessing import RobustScaler
 from sklearn.svm import SVC
 from sklearn.metrics import classification_report, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import joblib
 
 # ── Preprocessing ──────────────────────────────────────────────────────────────
-df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features.csv")
+df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_cleaner.csv")
 
 X = df.drop(columns=["filename", "label"])
 y = df["label"]
@@ -18,7 +18,7 @@ X_train, X_temp, y_train, y_temp = train_test_split(X, y, test_size=0.2, random_
 X_val, X_test, y_val, y_test     = train_test_split(X_temp, y_temp, test_size=0.5, random_state=42, stratify=y_temp)
 
 'scaler  = StandardScaler()'
-scaler = RobustScaler()
+scaler = StandardScaler()
 X_train = scaler.fit_transform(X_train)
 X_val   = scaler.transform(X_val)
 X_test  = scaler.transform(X_test)

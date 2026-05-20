@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 
 # ── Load combined training data ────────────────────────────────────────────────
-df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features2.csv")
+df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features.csv")
 
 print(f"Original shape: {df.shape}")
 
@@ -48,5 +48,13 @@ df_clean = pd.concat([meta.reset_index(drop=True), X_clean.reset_index(drop=True
 print(f"\nFinal shape: {df_clean.shape}")
 print(f"mfcc4 max after cleaning: {df_clean['mfcc4_sma3_stddevNorm'].max():.4f}")
 
-df_clean.to_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features2_cleaner.csv", index=False)
-print("Saved as combined_features2_cleaner.csv")
+df_clean.to_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_cleaner.csv", index=False)
+print("Saved as combined_features_cleaner.csv")
+
+# ── Save clean means and stds for test set cleaning ───────────────────────────
+clean_means = X_clean.mean()
+clean_stds  = X_clean.std()
+
+clean_means.to_csv(r"C:\Users\User\Documents\Bachelor-Thesis\python\train_clean_means.csv")
+clean_stds.to_csv(r"C:\Users\User\Documents\Bachelor-Thesis\python\train_clean_stds.csv")
+print("Saved training means and stds for test set cleaning")

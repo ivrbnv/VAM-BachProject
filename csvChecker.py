@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features2_cleaner.csv")
+df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_cleaner.csv")
 X = df.drop(columns=["filename", "label"])
 z_scores = np.abs((X - X.mean()) / X.std())
 remaining = (z_scores > 3).sum().sum()

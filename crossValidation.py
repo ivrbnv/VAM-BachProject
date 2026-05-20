@@ -1,6 +1,6 @@
 import pandas as pd
 import numpy as np
-from sklearn.model_selection import StratifiedKFold, cross_validate
+from sklearn.model_selection import StratifiedKFold
 from sklearn.preprocessing import RobustScaler, StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
@@ -16,7 +16,7 @@ X = train.drop(columns=["filename", "label"])
 y = train["label"]
 
 # ── Load fixed test set ────────────────────────────────────────────────────────
-test = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_testing.csv")
+test = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_testing_clean.csv")
 
 X_test = test.drop(columns=["filename", "label"])
 y_test = test["label"]

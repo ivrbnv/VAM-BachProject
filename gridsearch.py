@@ -6,8 +6,11 @@ from sklearn.metrics import classification_report, ConfusionMatrixDisplay
 import matplotlib.pyplot as plt
 import joblib
 
+#gridsearch.py - Hyperparameter tuning for Gradient Boosting Classifier using GridSearchCV. 
+# Evaluates best model on validation and test sets, saves model and scaler.
+
 # ── Preprocessing ──────────────────────────────────────────────────────────────
-df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features.csv")
+df = pd.read_csv(r"C:\Users\User\Documents\Bachelor-Thesis\result spreadsheets\combined_features_cleaner.csv")
 
 X = df.drop(columns=["filename", "label"])
 y = df["label"]
